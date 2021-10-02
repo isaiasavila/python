@@ -8,7 +8,7 @@ class Nota_Fiscal():
     def __init__(self, nome, produto, preco):
         self.nome = nome
         self.produto = produto
-        self.preço = preco
+        self.preco = preco
 
 pes = Pessoa('Isaias',39,'m')
 nf = Nota_Fiscal('Avila','Carro','50000.')

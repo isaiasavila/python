@@ -55,41 +55,5 @@ class Aleatoriedade:
             saida += ' ' + random.choice(p2)
         return saida
 
-    def jogo_velha(self):
-        '''
-        Exemplo de jogo da velha
-        '''
-        print("*********************************")
-        print("***Bem vindo ao jogo da Forca!***")
-        print("*********************************")
-
-        palavra_secreta = "bananas"
-        letras_acertadas = ["_", "_", "_", "_", "_", "_", "_"]
-        chances = 0
-        enforcou = False
-        acertou = False
-
-        print(letras_acertadas)
-
-        while(not acertou and not enforcou):
-            print("Jogando...")
-
-            chute = input("Digite a letra: ")
-            chute = chute.strip()
-
-            index = 0
-            for letra in palavra_secreta:
-                if (chute.upper() == letra.upper()):
-                    letras_acertadas[index] = letra
-                # else:
-                #     chances += 1
-                #     if chances == 6:
-                #         acertou = True
-                index = index + 1
-
-            print(letras_acertadas)
-
-        print("Fim do jogo")
-
-x = Aleatoriedade()
-x.jogo_velha()
+    
+    
