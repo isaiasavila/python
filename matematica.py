@@ -1,15 +1,27 @@
 #Utilidades
-
 import os
 from random import randint
 
-def testa_par(x):
+def testar_par(x):
     if x % 2 == 0:
         print(x,'é um número par')
     else:
         print(x,'é um número ímpar')
 
-def testa_primo(valor):
+def testar_primo(numero):
+    c = 1
+    if numero > 1:
+        for i in range(2, numero):#(3, numero // 2 + 1):#Nenhum número é divisível pela sua metade mais 1, depois de sua metade, só o será por ele mesmo. Que nesta lógica não será aplicada
+            if numero % i == 0:
+                c += 1
+        if c != 1:
+            return False #'Número não é primo'
+        else:
+            return True #'Número é primo'
+    else:
+        return False #'Número não é primo'
+
+def testar_primo_v2(valor):
     teste = 0
     for individuo in range(2, valor):
         if valor % individuo == 0:
@@ -19,7 +31,7 @@ def testa_primo(valor):
     else:
         print( valor,'é primo')
 
-def testa_perfeito(gretagarbo):
+def testar_numero_perfeito(gretagarbo):
     verifica = 0
     for qualquerum in range(1, gretagarbo):
         if gretagarbo % qualquerum == 0:
@@ -29,7 +41,7 @@ def testa_perfeito(gretagarbo):
     else:
         print(gretagarbo,'não é perfeito')
 
-def procura_divisores(n):
+def procurar_divisores(n):
     lista_de_divisores = []
     for i in range(1, n):
         if n % i == 0:
@@ -42,7 +54,7 @@ def procura_divisores(n):
             print(i)
         print(n)
 
-def lerMatriz():
+def ler_matriz():
     ordem = int(input('Ordem da matriz: '))
     matriz = []
     print('Digite os termos da matriz A')
@@ -57,7 +69,7 @@ def lerMatriz():
         for w in range(ordem):
             print('%7.2f' %matriz[k][w])
 
-def soma_algarismos(n):
+def somar_algarismos(n):
     n = str(n)
     while len(n) > 1:
         m = 0
@@ -66,31 +78,13 @@ def soma_algarismos(n):
         n = str(m)
     print(n)
 
-def quadrado(numero, expoente):
+def testar_quadrado(numero, expoente):
     '''Esta função eleva o primeiro parâmetro
        para o segundo parâmetro
     '''
     return numero ** expoente
 
-def f(x):
-    '''Esta função retorna o
-    quadrado de um número''' #Boa prática de documentação
-    return x**2
-
-def testa_primo(numero):
-    c = 1
-    if numero > 1:
-        for i in range(2, numero):#(3, numero // 2 + 1):#Nenhum número é divisível pela sua metade mais 1, depois de sua metade, só o será por ele mesmo. Que nesta lógica não será aplicada
-            if numero % i == 0:
-                c += 1
-        if c != 1:
-            return False #'Número não é primo'
-        else:
-            return True #'Número é primo'
-    else:
-        return False #'Número não é primo'
-
-def numeroAleatorio(tipo, min, max):
+def gerar_numero_aleatorio(tipo, min, max):
     import random
     if tipo == 0: #retorna um inteiro
         return random.randint(min, max)
@@ -99,7 +93,7 @@ def numeroAleatorio(tipo, min, max):
     else:
         return tipo
 
-def textoAleatorio(_listaPrimeiro, _listaSegundo = ''):
+def gerar_texto_aleatorio(_listaPrimeiro, _listaSegundo = ''):
     import random
     p1 = _listaPrimeiro
     p2 = _listaSegundo
@@ -109,7 +103,7 @@ def textoAleatorio(_listaPrimeiro, _listaSegundo = ''):
     return saida
         
 #Uma função para fazer uma leitura de número Real, retornando o valor digitado
-def lerReal(texto = 'Digite um número Real...\n'):#Se não for informado um parâmetro, usa o texto pré setado
+def ler_numero_real(texto = 'Digite um número Real...\n'):#Se não for informado um parâmetro, usa o texto pré setado
     while True:
         try:
             valor = float(input(texto))#Trocando float por int, tem-se uma para leitura de números inteiros
@@ -119,7 +113,7 @@ def lerReal(texto = 'Digite um número Real...\n'):#Se não for informado um par
             print('Erro de digitação!!!')
     return float(valor)
 
-def lerInteiro(texto):
+def ler_numero_inteiro(texto):
     while True:
         try:
             valor = int(input(texto,'\n'))
@@ -163,17 +157,12 @@ while 1:
     print(f'{b}')
     if b<7: break
 
-#exemplo de dicionários
-
 def cambio(componente):
     print(componente[0], 'R$ ', componente[1])
     print(componente[0], 'US$ ', componente[1] / 3.0)
     print('\n')
 
-def soma(alfa,beta):
-    return alfa + beta
-
-def funcaoDerivada():
+def funcao_derivada():
     import math
     from os import startfile
     from time import time, localtime
