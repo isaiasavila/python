@@ -213,6 +213,7 @@ class NBAPlayers:
 class Titanic:
 
     def __init__(self):
+        # https://github.com/BindiChen/machine-learning/blob/master/data-analysis/005-6-pandas-tricks/6-pandas-tricks.ipynb
         self.df = pd.read_csv('https://github.com/isaiasavila/datasets/raw/main/train.csv')
 
     def show_dataframe(self):
@@ -266,17 +267,70 @@ class Titanic:
         self.df[coluna] = pd.to_numeric(self.df[coluna], errors='coerce')
         self.show_dataframe()
 
-ds = Titanic()
-opcoes = ('1-type','2-select|type','3-to_numeric')
+    def retornar_valores_nulos(self):
+        # Detecta valores ausentes
+        self.df.info()
+        # Retorna o número de valores ausentes para cada coluna
+        print(self.df.isnull().sum())
+        # Retorna o número total de valores ausentes
+        print(self.df.isnull().sum().sum())
+        # Retorna a porcentagem de valores que estão faltando
+        print(self.df.isna().mean())
 
-while True:
-    print(opcoes)
-    opcao = input('Escolha: ')
-    if opcao == '1':
-        ds.tipo_dados()
-    elif opcao == '2':
-        ds.selecionar_varios(['int', 'datetime', 'object'])
-    elif opcao == '3':
-        ds.converter_coluna_para_numero('sales')
-    else:
-        break
+    def excluir_valores_nulos(self):
+        # Descarta linhas se houver algum valor NaN:
+        self.df.dropna(axis = 0)
+        # Descarta colunas se houver algum valor NaN:
+        self.df.dropna(axis = 1)
+        # Descarta colunas nas quais mais de 10% dos valores estão ausentes:
+        self.df.dropna(thresh=len(self.df)*0.9, axis=1)
+
+    def substituir_valores_nulos(self):
+        # Para substituir todos os valores de NaN por um escalar:
+        self.df.fillna(value=10)
+        # Para substituir os valores de NaN pelos valores da linha anterior:
+        self.df.fillna(axis=0, method='ffill')
+        # Para substituir os valores de NaN pelos valores da coluna anterior:
+        self.df.fillna(axis=1, method='ffill')
+        # Você também pode substituir os valores de NaN pelos valores da próxima linha
+        self.df.fillna(axis=0, method='bfill')
+        # Ou coluna
+        self.df.fillna(axis=1, method='bfill')
+        # Substitui os valores de NaN pela média.
+        self.df['Age'].fillna(value=self.df['Age'].mean(), inplace=True)
+
+    def categorizar(self):
+        import sys
+        self.df['ageGroup']=pd.cut(self.df['Age'],bins=[0, 13, 19, 61, sys.maxsize],labels=['<12', 'Teen', 'Adult', 'Older'])
+        print(self.df['ageGroup'])
+
+    def copiar_area_transferencia(self):
+        # Selecionar os dados e copiá-los para a área de transferência.
+        self.df = pd.read_clipboard()
+
+    def concatenar_data_frame(self):
+        from glob import glob
+        files = sorted(glob('data_row_*.csv'))
+        # concat() ignora o index e usa o índice inteiro padrão.
+        pd.concat((pd.read_csv(file) for file in files), ignore_index=True)
+        files = sorted(glob('data_col_*.csv'))
+        # concat() conecta ao longo do eixo das colunas.
+        pd.concat((pd.read_csv(file) for file in files), axis=1)
+
+# ds = Titanic()
+# opcoes = ('1-type','2-select|type','3-to_numeric','4-isnull|isna','5-cut')
+# while True:
+#     print(opcoes)
+#     opcao = input('Escolha: ')
+#     if opcao == '1':
+#         ds.tipo_dados()
+#     elif opcao == '2':
+#         ds.selecionar_varios(['object'])
+#     elif opcao == '3':
+#         ds.converter_coluna_para_numero('Age')
+#     elif opcao == '4':
+#         ds.retornar_valores_nulos()
+#     elif opcao == '5':
+#         ds.categorizar()
+#     else:
+#         break
