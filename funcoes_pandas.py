@@ -255,7 +255,7 @@ class Titanic:
         self.df.select_dtypes(include=parametros)
         self.show_dataframe()
 
-    def converter_coluna(self, coluna):
+    def converter_coluna_para_numero(self, coluna):
         '''
         '''
         # Uma opção para alterar o tipo de coluna
@@ -267,7 +267,7 @@ class Titanic:
         self.show_dataframe()
 
 ds = Titanic()
-opcoes = ('1-type','2-select|type')
+opcoes = ('1-type','2-select|type','3-to_numeric')
 
 while True:
     print(opcoes)
@@ -276,5 +276,7 @@ while True:
         ds.tipo_dados()
     elif opcao == '2':
         ds.selecionar_varios(['int', 'datetime', 'object'])
+    elif opcao == '3':
+        ds.converter_coluna_para_numero('sales')
     else:
         break
