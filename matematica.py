@@ -2,6 +2,13 @@
 import os
 from random import randint
 
+def fatorial(numero):
+    if numero == 0 or numero == 1:
+        return 1
+    else:
+        # recursividade
+        return numero * fatorial(numero - 1)
+
 def testar_par(x):
     if x % 2 == 0:
         print(x,'é um número par')
