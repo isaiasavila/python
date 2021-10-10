@@ -2,6 +2,13 @@
 import os
 from random import randint
 
+def fibonacci(numero):
+    if numero <= 1:
+        return numero
+    else:
+        # recursividade
+        return fibonacci(numero - 1) + fibonacci(numero - 2)
+    
 def fatorial(numero):
     if numero == 0 or numero == 1:
         return 1
