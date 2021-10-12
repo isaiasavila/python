@@ -54,14 +54,38 @@ def abrirArquivo():
         print('Succeeded')
     finally:
         f.close()
+        
+def exemplo_lambda():
+    first_letter = lambda x: x[0]
+    names = ['Alan', 'Adam', 'Wes', 'Will', 'Albert', 'Steven']
+    for letter, names in itertools.groupby(names, first_letter):
+        print(letter, list(names)) # names é um gerador
 
-first_letter = lambda x: x[0]
-names = ['Alan', 'Adam', 'Wes', 'Will', 'Albert', 'Steven']
-for letter, names in itertools.groupby(names, first_letter):
-    print(letter, list(names)) # names é um gerador
+    a = ['João', 'Rafael', 'Douglas']
+    for x in a:
+        print('%s tem %i letras' %(x,len(x)))
 
-a = ['João', 'Rafael', 'Douglas']
-for x in a:
-    print('%s tem %i letras' %(x,len(x)))
+    x = input('...')
 
-x = input('...')
+def Escrever_Frase_Falada():
+    '''
+    Depois da mensagem, esperar 1 segundo e falar a frase, se tudo der certo aparecerá um print com a frase falada
+    '''
+    import speech_recognition as sr
+    # SpeechRecognition
+    # pip install pipwin
+    # pip install SpeechRecognition
+    # pip install pyaudio
+    # Recognizer
+    rec = sr.Recognizer()
+    # Microphone
+    # mic = sr.Microphone()
+    # print(sr.Microphone().list_microphone_names())
+    # Nessa lista com todos os microfones do SO, só escolher o índice desejado
+    # Ou deixar vazio para o padrão
+    with sr.Microphone() as mic:
+        rec.adjust_for_ambient_noise(mic)
+        print("fale vivente!")
+        audio = rec.listen(mic)
+        texto = rec.recognize_google(audio, language='pt-BR')
+        print(texto)
