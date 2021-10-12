@@ -415,3 +415,17 @@ lista_cpfs = ['44444444444', '111.111.111-11', '11111111111', '222.222.222-22', 
 # print('lista_ordenada1 = ', lista_ordenada1)
 # print('lista_ordenada2 = ', lista_ordenada2)
 # print('lista = ', lista)
+
+def lambda_exemplos():
+    preco = 1000
+    # Função normal
+    def imposto_f(preco):
+        return preco * .3
+    # Função Lambda
+    imposto_l = lambda x: x * .3
+    print(imposto_f(preco))
+    print(imposto_l(preco))
+    precos = [100, 500, 10, 25]
+    # lista, retornando list usando map para atualizar todos os valores
+    impostos = list(map(lambda x:x*0.3, precos))
+    print(impostos)
