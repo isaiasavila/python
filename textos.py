@@ -89,9 +89,11 @@ def mostrar(string=None):
         print(string)
     else:
         print(palavra)
-#
-#
+
 #Textos
+s3 = ('ok','então')
+# método de adicionar um caracter coringa em um texto
+print("/".join(s3))
 palavra='termodinâmica'
 mostrar(palavra[0])
 mostrar(3*palavra[0])
